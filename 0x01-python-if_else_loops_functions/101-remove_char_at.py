@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-for i in reversed(range(ord('a'), ord('z') + 1)):
-    if (i % 2 == 1):
-        i -= 32
-    print("{:c}".format(i), end="")
+def remove_char_at(str, n):
+    if n < 0:
+        return str
+    newstr = str[:n] + str[n + 1:]
+    return '{:s}'.format(newstr)
