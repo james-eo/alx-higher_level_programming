@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-"""Defines a class MyInt that inherits from int."""
+"""
+Program will try to add attributes to class if it possible
+"""
 
 
-class MyInt(int):
-    """Invert int operators == and !=."""
+def add_attribute(obj, key, value):
+    """
+    This function add attributes to class if it possible
+    """
 
-    def __eq__(self, value):
-        """Override == opeartor with != behavior."""
-        return self.real != value
-
-    def __ne__(self, value):
-        """Override != operator with == behavior."""
-        return self.real == value
+    if not hasattr(obj, "__dict__"):
+        raise TypeError("can't add new attribute")
+    return (setattr(obj, key, value))
