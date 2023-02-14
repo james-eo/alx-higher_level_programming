@@ -1,146 +1,168 @@
 #!/usr/bin/python3
-"""
-Unittest of the Base Class
-"""
-import unittest
+"""Definition class"""
+import csv
+import json
 import os
-import pycodestyle
-from models.base import Base
-from models.rectangle import Rectangle
-from models.square import Square
+import turtle
 
-class TestBaseClass(unittest.TestCase):
-    """
-    Class of unittest to test Base Class
-    """
-    def tester_pycodestyle_base(self):
-        """
-        Test that checks Pycodestyle (PEP8)
-        """
-        syntax = pycodestyle.StyleGuide(quit=True)
-        check = syntax.check_files(['models/base.py'])
-        self.assertEqual(
-            check.total_errors, 0,
-            "Found code style errors (and warnings)."
-        )
-    
-    def tester_of_id_positive(self):
-        """
-        Tester of positive id's
-        """
-        b1 = Base(150)
-        self.assertEqual(b1.id, 150)
-        b2 = Base(200)
-        self.assertEqual(b2.id, 200)
-        b3 = Base(300)
-        self.assertEqual(b3.id, 300)
-    
-    def tester_of_id_null(self):
-        """
-        Tester of None id's
-        """
-        # b1 = Base()
-        # self.assertEqual(b1.id, 1)
-        b2 = Base(None)
-        self.assertEqual(b2.id, 2)
-        b3 = Base()
-        self.assertEqual(b3.id, 3)
 
-    def tester_of_id_negative(self):
-        """
-        Tester of negative id's
-        """
-        b1 = Base(-20)
-        self.assertEqual(b1.id, -20)
-        b2 = Base(-40)
-        self.assertEqual(b2.id, -40)
-        b3 = Base(-60)
-        self.assertEqual(b3.id, -60)
+class Base:
+    """Definition Base class"""
+    __nb_objects = 0
 
-    def tester_id_string(self):
-        """
-        Tester of id's string
-        """
-        b1 = Base("Hello People")
-        self.assertEqual(b1.id, "Hello People")
-        b2 = Base("Holberton")
-        self.assertEqual(b2.id, "Holberton")
-        b3 = Base("Luis")
-        self.assertEqual(b3.id, "Luis")
-        b4 = Base("Fernando")
-        self.assertEqual(b4.id, "Fernando")
+    def __init__(self, id=None):
+        """This class will be the “base” of all other
+        classes in this project"""
+        if id is not None:
+            self.id = id
+        else:
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
 
-    def tester_to_json_string(self):
-        """
-        Tester of to_json_string method
-        """
-        b1 = Rectangle(10, 22, 62, 8)
-        dictionary = b1.to_dictionary()
-        json_dictionary = Base.to_json_string([dictionary])
-        self.assertEqual(type(json_dictionary), str)
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """returns the JSON string representation
+        of list_dictionaries"""
 
-    def tester_to_json_string_empty(self):
-        """
-        Tester to json_string empty
-        """
-        json_dictionary = Base.to_json_string([])
-        self.assertEqual(json_dictionary, "[]")
-        data_none = None
-        json_dictionary_2 = Base.to_json_string(data_none)
-        self.assertEqual(json_dictionary_2, "[]")
-    
-    def tester_instance(self):
-        """
-        Tester instance of Base Class
-        """
-        p1 = Base()
-        self.assertEqual(type(p1), Base)
-        self.assertTrue(isinstance(p1, Base))
+        if (list_dictionaries is None or len(list_dictionaries) == 0):
+            return ("[]")
 
-    def tester_to_json_string_dict(self):
+        return json.dumps(list_dictionaries)
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """writes the JSON string representation
+        of list_objs to a file"""
+        result = []
+        namefile = cls.__name__ + ".json"
+        options = ["Rectangle", "Square"]
+        name = ""
+
+        if (list_objs is not None and len(list_objs)):
+            name = type(list_objs[0]).__name__
+            if (name in options):
+                if all((type(obj).__name__ == name) for obj in list_objs):
+                    result = [obj.to_dictionary() for obj in list_objs]
+
+        with open(namefile, mode="w", encoding="utf-8") as f:
+            f.write(cls.to_json_string(result))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """returns the list of the JSON string
+        representation json_string"""
+        list_new = []
+
+        if ((json_string is None) or (len(json_string) == 0)):
+            return list_new
+
+        return (json.loads(json_string))
+
+    @classmethod
+    def create(cls, **dictionary):
         """
-        Test functionality of json string
+        returns an instance with all attributes already set:
+        - Create a Rectangle or Square instance with “dummy”
+        mandatory attributes (width, height, size, etc.)
+        - Call update instance method to this “dummy” instance
+        to apply your real values
         """
-        dictionary = {'id': 42, 'x': 55, 'y': 40, 'width': 52, 'height': 56}
-        json_data = Base.to_json_string([dictionary])
+        if (cls.__name__) == "Rectangle":
+            dummy = cls(2, 2)
+        if (cls.__name__) == "Square":
+            dummy = cls(2)
 
-        self.assertTrue(isinstance(dictionary, dict))
-        self.assertTrue(isinstance(json_data, str))
-        self.assertCountEqual(
-            json_data,
-            '{["id": 42, "x": 55, "y": 40, "width": 52, "height": 56]}'
-        )
-    
-    def tester_to_json_string_wrong(self):
+        dummy.update(**dictionary)
+
+        return dummy
+
+    @classmethod
+    def load_from_file(cls):
         """
-        Tester of wrong functionality of this method
+        returns a list of instances:
+        - The filename must be: <Class name>.json
+        - If the file doesn’t exist, return an empty list
+        - Otherwise, return a list of instances - the type of these instances
+        depends on cls (current class using this method)
         """
-        json_data = Base.to_json_string(None)
-        self.assertEqual(json_data, "[]")
+        filename = cls.__name__ + ".json"
+        json_string = ""
+        devolution = []
 
-        warn = ("to_json_string() missing 1 required positional argument: " +
-                "'list_dictionaries'")
+        if os.path.exists('./{:s}'.format(filename)):
+            with open(filename, mode="r", encoding="utf-8") as f:
+                json_string = f.read()
+                list_instances = cls.from_json_string(json_string)
+                for dic in list_instances:
+                    devolution.append(cls.create(**dic))
 
-        with self.assertRaises(TypeError) as msg:
-            Base.to_json_string()
+        return devolution
 
-        self.assertEqual(warn, str(msg.exception))
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """Serialization to file csv"""
+        result = "[]"
+        filename = cls.__name__ + ".csv"
+        options = ["Rectangle", "Square"]
+        name = ""
 
-        warn = "to_json_string() takes 1 positional argument but 2 were given"
+        if (list_objs is not None and len(list_objs)):
+            name = type(list_objs[0]).__name__
+            if (name in options):
+                if all((type(obj).__name__ == name) for obj in list_objs):
+                    result = [list(obj.to_dictionary().values())
+                              for obj in list_objs]
 
-        with self.assertRaises(TypeError) as msg:
-            Base.to_json_string([{43, 87}], [{22, 17}])
+        with open(filename, mode="w", encoding="utf-8") as f:
+            for data in result:
+                f.write(",".join(str(data)[1:-1].split(", ")) + "\n")
 
-        self.assertEqual(warn, str(msg.exception))
+    @classmethod
+    def load_from_file_csv(cls):
+        """Read a CSV file and create instances from the dicts"""
 
-    def test_create(self):
+        filename = cls.__name__ + ".csv"
+        option_rec = ["id", "width", "height", "x", "y"]
+        option_sq = ["id", "size", "x", "y"]
+        result = []
+
+        if os.path.exists("./{:s}".format(filename)):
+            with open(filename, mode="r", encoding="utf-8") as f:
+                data_csv = csv.reader(f)
+                if (cls.__name__ == "Rectangle"):
+                    for data in data_csv:
+                        new_dict = {}
+                        for key, value in zip(option_rec, data):
+                            new_dict[key] = int(value)
+                        result.append(cls.create(**new_dict))
+                elif (cls.__name__ == "Square"):
+                    for data in data_csv:
+                        new_dict = {}
+                        for key, value in zip(option_sq, data):
+                            new_dict[key] = int(value)
+                        result.append(cls.create(**new_dict))
+        return (result)
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
         """
-        Test create method
+        Opens a window and draws all the Rectangles and Squares
         """
-        with self.assertRaises(TypeError) as msg:
-            warn = Rectangle.create('Monty Python')
+        turtle.shape("turtle")
+        for rectangle in list_rectangles:
+            turtle.goto(rectangle.x, rectangle.y)
+            for i in range(4):
+                turtle.pendown()
+                turtle.forward(rectangle.width)
+                turtle.right(90)
+                turtle.forward(rectangle.height)
+                turtle.penup()
+        for square in list_squares:
+            turtle.goto(square.x, square.y)
+            for i in range(4):
+                turtle.pendown()
+                turtle.forward(square.size)
+                turtle.right(90)
+                turtle.penup()
 
-        self.assertEqual(
-            "create() takes 1 positional argument but 2 were given",
-            str(msg.exception)
-        )
+        turtle.done()
