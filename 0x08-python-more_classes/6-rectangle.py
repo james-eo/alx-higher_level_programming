@@ -3,8 +3,7 @@
 
 
 class Rectangle:
-    """
-    This class defines a rectangle.
+    """This class defines a rectangle.
 
     Attributes:
     - __width (int): The width of the rectangle (default is 0).
