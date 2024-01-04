@@ -9,7 +9,8 @@ class Rectangle:
         - _height (int): The height of the rectangle (default is 0).
 
     Methods:
-        - __init__(self, width=0, height=0): Initializes a new Rectangle instance.
+        - __init__(self, width=0, height=0): Initializes a
+         new Rectangle instance.
         - width (property): Retrieves the width of the rectangle.
         - width (setter): Sets the width of the rectangle.
         - height (property): Retrieves the height of the rectangle.
@@ -21,8 +22,10 @@ class Rectangle:
         Initializes a new Rectangle instance.
 
         Args:
-            - width (int): The width of the rectangle must be an integer(default is 0).
-            - height(int): The height of the rectangle must be an integer(default is 0)
+            - width (int): The width of the rectangle
+            must be an integer(default is 0).
+            - height(int): The height of the rectangle
+            must be an integer(default is 0)
 
         """
         self.__height = 0

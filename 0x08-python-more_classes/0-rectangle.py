@@ -11,4 +11,3 @@ class Rectangle:
         There are no methods yet
     """
     pass
-
