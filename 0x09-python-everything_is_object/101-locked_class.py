@@ -7,4 +7,4 @@ class LockedClass:
     a new instance attributes except if the new
     instant attribute is called first_name."""
 
-    __slots__ = ["first_name"]
+    __slots__ = ("first_name",)
