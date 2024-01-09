@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """Creates an object from JSON"""
-import JSON
+import json
 
 
 def load_from_json_file(filename):
@@ -11,5 +11,5 @@ def load_from_json_file(filename):
     @filename: the file to write into
     Returns: an objest"""
 
-    with open(filename) as f:
-        return json.load(f)
+    with open(filename, 'r') as f:
+        return json.loads(f.read())
