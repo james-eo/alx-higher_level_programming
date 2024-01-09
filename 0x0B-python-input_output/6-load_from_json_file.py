@@ -3,6 +3,7 @@
 """Creates an object from JSON"""
 import JSON
 
+
 def load_from_json_file(filename):
 
     """ a function that creates an Object from a “JSON file”
