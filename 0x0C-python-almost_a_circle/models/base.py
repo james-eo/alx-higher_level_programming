@@ -105,7 +105,7 @@ class Base:
             Base: Instance with attributes set according to the dictionary.
         """
 
-        dummy_instance = cls(0, 0)
+        dummy_instance = cls(1, 1)
         dummy_instance.update(**dictionary)
         return dummy_instance
 
