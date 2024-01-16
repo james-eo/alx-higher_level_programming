@@ -1,4 +1,9 @@
 #!/use/bin/python3
+"""Defines the Rectangle class, which represents a rectangle shape.
+
+Classes:
+    Rectangle: A class representing a rectangle.
+"""
 
 from models.rectangle import Rectangle
 
