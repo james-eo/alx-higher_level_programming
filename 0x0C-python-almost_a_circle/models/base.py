@@ -107,6 +107,8 @@ class Base:
 
         dummy_instance = cls(1, 1)
         dummy_instance.update(**dictionary)
+        dummy_instance.x = 0
+        dummy_instance.y = 0 
         return dummy_instance
 
     @classmethod
