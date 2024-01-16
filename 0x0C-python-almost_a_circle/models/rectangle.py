@@ -6,9 +6,7 @@ from models.base import Base
 class Rectangle(Base):
     """Rectangle class representing a rectangle shape.
 
-
     Inherits from Base.
-
 
     Attributes:
         id (int): Identifier for the rectangle.
@@ -18,22 +16,26 @@ class Rectangle(Base):
         __y (int): Y-coordinate of the rectangle.
 
     Methods:
-        __init__(self, width, height, x=0, y=0, id=None): Class
+        - __init__(self, width, height, x=0, y=0, id=None): Class
         constructor to initialize rectangle attributes.
-        width(self): Getter method for the width attribute.
-        height(self): Getter method for the height attribute.
-        x(self): Getter method for the x attribute.
-        y(self): Getter method for the y attribute.
-        width(self, value): Setter method for the width attribute.
-        height(self, value): Setter method for the height attribute.
-        x(self, value): Setter method for the x attribute.
-        y(self, value): Setter method for the y attribute.
-        area(self): Public method to calculate
+        - width(self): Getter method for the width attribute.
+        - height(self): Getter method for the height attribute.
+        - x(self): Getter method for the x attribute.
+        - y(self): Getter method for the y attribute.
+        - width(self, value): Setter method for the width attribute.
+        - height(self, value): Setter method for the height attribute.
+        - x(self, value): Setter method for the x attribute.
+        - y(self, value): Setter method for the y attribute.
+        - area(self): Public method to calculate
         and return the area value of the rectangle.
-        display(self): Public method to print the Rectangle
+        - display(self): Public method to print the Rectangle
         instance with the character #, considering x and y.
-        __str__(self): Overridden method to return a string
+        - __str__(self): Overridden method to return a string
         representation of the Rectangle.
+        - update(self, *args, **kwargs): Public method to assign
+        arguments to each attribute.
+        - to_dictionary(self): Returns the dictionary representation
+        of the Rectangle class.
         """
 
     def __init__(self, width, height, x=0, y=0, id=None):
