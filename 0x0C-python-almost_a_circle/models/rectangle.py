@@ -2,6 +2,7 @@
 
 from models.base import Base
 
+
 class Rectangle(Base):
     """Rectangle class representing a rectangle shape.
 
@@ -52,6 +53,7 @@ class Rectangle(Base):
         self.height = height
         self.x = x
         self.y = y
+
     @property
     def width(self):
         """Getter method for the width attribute."""
@@ -79,7 +81,7 @@ class Rectangle(Base):
         elif value <= 0:
             raise ValueError("height must be > 0")
         self.__height = value
-    
+
     @property
     def x(self):
         """Getter method for the x attribute."""
@@ -98,7 +100,7 @@ class Rectangle(Base):
     def y(self):
         """Getter method for the y attribute."""
         return self.__y
-    
+
     @y.setter
     def y(self, value):
         """Setter method for the y attribute."""
@@ -125,9 +127,8 @@ class Rectangle(Base):
         for _ in range(self.__height):
             print(" " * self.__x + "#" * self.__width)
 
-
     def __str__(self):
-        """Overridden method to return a string 
+        """Overridden method to return a string
         representation of the Rectangle.
         """
 
@@ -140,7 +141,7 @@ class Rectangle(Base):
         """Public method to assign arguments to each attribute."""
 
         if args:
-            self.id, self.width,self.height,self.x,self.y = args
+            self.id, self.width, self.height, self.x, self.y = args
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)

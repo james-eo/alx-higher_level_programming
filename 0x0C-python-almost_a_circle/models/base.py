@@ -4,6 +4,7 @@ import json
 import csv
 import turtle
 
+
 class Base:
     """"Base class serving as the foundation for other classes.
 
@@ -25,7 +26,7 @@ class Base:
        -update(self, *args, **kwargs): Method to update the instance
        attributes based on provided arguments.
     """
-    
+
     __nb_objects = 0
 
     def __init__(self, id=None):
@@ -73,7 +74,7 @@ class Base:
         dict_list = [obj.to_dictionary() for obj in list_objs]
         json_string = cls.to_json_string(dict_list)
         filename = cls.__name__ + ".json"
-        
+
         with open(filename, 'w') as file:
             file.write(json_string)
 
@@ -91,7 +92,6 @@ class Base:
         if json_string is None or len(json_string) == 0:
             return []
         return json.loads(json_string)
-
 
     @classmethod
     def create(cls, **dictionary):
@@ -129,7 +129,6 @@ class Base:
                 return instances
         except FileNotFoundError:
             return []
-
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
@@ -203,11 +202,10 @@ class Base:
 
         return instances
 
-
     """@staticmethod
     def draw(list_rectangles, list_squares):
        Static method to open a window and draw all the Rectangles
-        and Squares using Turtle graphics.
+       and Squares using Turtle graphics.
 
         Args:
             list_rectangles (list): List of Rectangle instances.
@@ -215,7 +213,7 @@ class Base:
 
         Returns:
             None
-       
+
         turtle.speed(2)
 
         # Drawin rectangles
@@ -242,8 +240,6 @@ class Base:
                 turtle.left(90)
 
         turtle.exitonclick()"""
-
-
 
     '''@staticmethod
     def draw(list_rectangles, list_squares):
@@ -296,13 +292,11 @@ class Base:
 
         turtle.exitonclick()'''
 
-
-
-
     @staticmethod
     def draw(list_rectangles, list_squares):
         """
-        Static method to open a window and draw all the Rectangles and Squares using Turtle graphics.
+        Static method to open a window and draw all the
+        Rectangles and Squares using Turtle graphics.
 
         Args:
             list_rectangles (list): List of Rectangle instances.
@@ -313,10 +307,10 @@ class Base:
         """
         turtle.speed(2)  # Adjust the speed as needed
 
-        # Draw rectangles with different colors
+        # Drawing rectangles with different colors
         for i, rectangle in enumerate(list_rectangles):
             turtle.penup()
-            turtle.goto(rectangle.x + i * 50, rectangle.y)  # Adjust spacing between rectangles
+            turtle.goto(rectangle.x + i * 50, rectangle.y)
             turtle.pendown()
 
             # Set a different color for each rectangle
@@ -334,7 +328,7 @@ class Base:
         # Draw squares with different colors
         for i, square in enumerate(list_squares):
             turtle.penup()
-            turtle.goto(square.x + i * 50, square.y)  # Adjust spacing between squares
+            turtle.goto(square.x + i * 50, square.y)
             turtle.pendown()
 
             # Set a different color for each square

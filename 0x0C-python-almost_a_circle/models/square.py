@@ -2,6 +2,7 @@
 
 from models.rectangle import Rectangle
 
+
 class Square(Rectangle):
     """Class Square inherits from Rectangle class
 
@@ -35,7 +36,6 @@ class Square(Rectangle):
 
         super().__init__(size, size, x, y, id)
 
-
     @property
     def size(self):
         """Getter method for the size attribute."""
@@ -53,7 +53,7 @@ class Square(Rectangle):
         """
 
         if args:
-         #   self.id,self.size, self.x, self.y = args
+            # self.id,self.size, self.x, self.y = args
             if len(args) >= 1:
                 self.id = args[0]
             if len(args) >= 2:
@@ -70,8 +70,6 @@ class Square(Rectangle):
         """Overridden method to return a string
         representation of the Square.
         """
-
-
         return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
 
     def to_dictionary(self):
