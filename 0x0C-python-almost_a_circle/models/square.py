@@ -1,8 +1,8 @@
-#!/use/bin/python3
-"""Defines the Rectangle class, which represents a rectangle shape.
+#!/usr/bin/python3
+"""Defines the  Squre class, which represents a squre shape.
 
 Classes:
-    Rectangle: A class representing a rectangle.
+    Square: A class representing a square.
 """
 
 from models.rectangle import Rectangle
