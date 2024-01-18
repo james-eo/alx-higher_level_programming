@@ -69,7 +69,8 @@ class Square(Rectangle):
                 self.y = args[3]
         elif kwargs:
             for key, value in kwargs.items():
-                setattr(self, key, value)"""
+                setattr(self, key, value)
+        """
         if args:
             if len(args) >= 1:
                 self.id = args[0]
@@ -90,12 +91,6 @@ class Square(Rectangle):
                 elif key == 'y':
                     self.y = value
 
-    def __str__(self):
-        """Overridden method to return a string
-        representation of the Square.
-        """
-        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"
-
     def to_dictionary(self):
         """Returns the dictionary representation of
         the Square class
@@ -106,3 +101,9 @@ class Square(Rectangle):
                 'x': self.x,
                 'y': self.y
                 }
+
+    def __str__(self):
+        """Overridden method to return a string
+        representation of the Square.
+        """
+        return f"[Square] ({self.id}) {self.x}/{self.y} - {self.width}"

@@ -134,16 +134,6 @@ class Rectangle(Base):
         for _ in range(self.__height):
             print(" " * self.__x + "#" * self.__width)
 
-    def __str__(self):
-        """Overridden method to return a string
-        representation of the Rectangle.
-        """
-
-        return (
-                f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - "
-                f"{self.__width}/{self.__height}"
-                )
-
     def update(self, *args, **kwargs):
         """Public method to assign arguments to each attribute."""
 
@@ -164,3 +154,12 @@ class Rectangle(Base):
                 'x': self.x,
                 'y': self.y
                 }
+
+    def __str__(self):
+        """Overridden method to return a string
+        representation of the Rectangle.
+        """
+        return (
+                f"[Rectangle] ({self.id}) {self.__x}/{self.__y} - "
+                f"{self.__width}/{self.__height}"
+                )

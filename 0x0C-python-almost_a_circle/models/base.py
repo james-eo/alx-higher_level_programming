@@ -202,96 +202,6 @@ class Base:
 
         return instances
 
-    """@staticmethod
-    def draw(list_rectangles, list_squares):
-       Static method to open a window and draw all the Rectangles
-       and Squares using Turtle graphics.
-
-        Args:
-            list_rectangles (list): List of Rectangle instances.
-            list_squares (list): List of Square instances.
-
-        Returns:
-            None
-
-        turtle.speed(2)
-
-        # Drawin rectangles
-        for rectangle in list_rectangles:
-            turtle.penup()
-            turtle.goto(rectangle.x, rectangle.y)
-            turtle.pendown()
-            turtle.forward(rectangle.width)
-            turtle.left(90)
-            turtle.forward(rectangle.height)
-            turtle.left(90)
-            turtle.forward(rectangle.width)
-            turtle.left(90)
-            turtle.forward(rectangle.height)
-            turtle.left(90)
-
-        # Drawing Squares
-        for square in list_squares:
-            turtle.penup()
-            turtle.goto(square.x, square.y)
-            turtle.pendown()
-            for _ in range(4):
-                turtle.forward(square.size)
-                turtle.left(90)
-
-        turtle.exitonclick()"""
-
-    '''@staticmethod
-    def draw(list_rectangles, list_squares):
-        """
-        Static method to open a window and draw all the
-        Rectangles and Squares using Turtle graphics.
-
-        Args:
-            list_rectangles (list): List of Rectangle instances.
-            list_squares (list): List of Square instances.
-
-        Returns:
-            None
-        """
-        turtle.speed(2)
-
-        # Draw rectangles with different colors
-        for i, rectangle in enumerate(list_rectangles):
-            turtle.penup()
-            turtle.goto(rectangle.x, rectangle.y)
-            turtle.pendown()
-
-            # Set a different color for each rectangle
-            turtle.color("blue" if i % 2 == 0 else "red")
-            turtle.begin_fill()
-
-            for _ in range(2):
-                turtle.forward(rectangle.width)
-                turtle.left(90)
-                turtle.forward(rectangle.height)
-                turtle.left(90)
-
-            turtle.end_fill()
-
-        # Draw squares with different colors
-        for i, square in enumerate(list_squares):
-            turtle.penup()
-            turtle.goto(square.x, square.y)
-            turtle.pendown()
-
-            # Set a different color for each square
-            turtle.color("green" if i % 2 == 0 else "purple")
-            turtle.begin_fill()
-
-            for _ in range(4):
-                turtle.forward(square.size)
-                turtle.left(90)
-
-            turtle.end_fill()
-
-        turtle.exitonclick()'''
-
     @staticmethod
     def draw(list_rectangles, list_squares):
         """
@@ -305,7 +215,7 @@ class Base:
         Returns:
             None
         """
-        turtle.speed(2)  # Adjust the speed as needed
+        turtle.speed(2)
 
         # Drawing rectangles with different colors
         for i, rectangle in enumerate(list_rectangles):
