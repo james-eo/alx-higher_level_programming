@@ -12,7 +12,7 @@ if (arg1 === undefined || arg2 === undefined) {
 const args = process.argv.splice(2);
 
 if (args.length < 2) {
-    console.log("Please provide two arguments");
+  console.log('Please provide two arguments');
 } else {
-    console.log(`${args[0]} is ${args[1]}`);
+  console.log(`${args[0]} is ${args[1]}`);
 }
