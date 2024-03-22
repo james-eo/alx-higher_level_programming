@@ -9,7 +9,7 @@ if __name__ == "__main__":
                            passwd="MSQL_PASSWORD",
                            db="hbtn_0e_0_usa")
     cur = conn.cursor()
-    cur.execute("SELECT * FROM states WHERE BINARY name LIKE 'N%'")
+    cur.execute("SELECT * FROM states WHERE name LIKE 'N%';")
     states = cur.fetchall()
 
     for state in states:
