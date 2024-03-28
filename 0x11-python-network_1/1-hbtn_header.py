@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Fetches a URL and displays the value of
-the X-Request-Id variable 
+the X-Request-Id variable
 """
 import urllib.request
 import sys
