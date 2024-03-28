@@ -5,12 +5,24 @@ import requests
 import sys
 
 
-if __name__ == "__main__":
-    url = f'https://api.github.com/repos/{sys.argv[2]}/{sys.argv[1]}/commits'
-    request = requests.get(url)
+def list_commits(repository, owner):
+    url = f"https://api.github.com/repos/{owner}/{repository}/commits"
+    response = requests.get(url)
 
-    commits = request.json()
-    for commit in commits[:10]:
-        sha = commit.get("sha")
-        author_name = commit["commit"]["author"]["name"]
-        print(f"{sha}: {committer}")
+    if response.status_code == 200:
+        commits = response.json()[:10]
+        for commit in commits:
+            sha = commit['sha']
+            author_name = commit['commit']['author']['name']
+            print(f"{sha}: {author_name}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python script.py <repository> <owner>")
+        sys.exit(1)
+
+    repository = sys.argv[1]
+    owner = sys.argv[2]
+
+    list_commits(repository, owner)
