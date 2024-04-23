@@ -8,7 +8,7 @@ request.get(url, (err, response, data) => {
   if (err) {
     console.log(err);
   } else {
-    console.log(JSON.parse(data));
+    console.log(JSON.parse(data).title);
   }
 });
 
