@@ -7,6 +7,6 @@ request(url, function (err, response, data) {
   if (err) {
     console.log(err);
   } else {
-    console.log('$response.statusCode');
+    console.log('code: $response.statusCode');
   }
 });
